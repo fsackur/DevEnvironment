@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+    <Snippets  xmlns='http://schemas.microsoft.com/PowerShell/Snippets'>
+        <Snippet Version='1.0.0'>
+            <Header>
+                <Title>DefaultDisplaySet</Title>
+                <Description>&quot;Set the column order for PSObjects&quot;</Description>
+                <Author></Author>
+                <SnippetTypes>
+                    <SnippetType>Expansion</SnippetType>
+                </SnippetTypes>
+            </Header>
+
+            <Code>
+                <Script Language='PowerShell' CaretOffset='0'>
+                    <![CDATA[function Add-DefaultMembers {
+    <#
+        .Synopsis
+        Applies formatting info to a custom object
+        
+        .Description
+        Pass-by-reference - the original object is updated
+
+        Accepts
+    #>
+    param(
+        [Parameter(Position=0, ValueFromPipeline=$true)]
+        [psobject]$InputObject,
+        [Parameter(Position=1)]
+        [string[]]$DisplayProperties,
+        [Parameter(Position=2)]
+        [string[]]$SortProperties,
+        [string]$TypeName
+    )
+
+    if ($TypeName) {$InputObject.PSTypeNames.Insert(0, $TypeName)}
+   
+    $Display = New-Object System.Management.Automation.PSPropertySet('DefaultDisplayPropertySet', $DisplayProperties)
+    $Sort =    New-Object System.Management.Automation.PSPropertySet('DefaultKeyPropertySet', $SortProperties)
+    $PSStandardMembers = [System.Management.Automation.PSMemberInfo[]]@($Display, $Sort)
+
+    Add-Member -InputObject $InputObject -MemberType MemberSet -Name PSStandardMembers -Value $PSStandardMembers
+}]]>
+                </Script>
+            </Code>
+
+    </Snippet>
+</Snippets>
+
