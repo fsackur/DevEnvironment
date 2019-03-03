@@ -34,7 +34,7 @@ git push
 #git log           #enter 'q' to quit if you are using the default pager, which is 'less'. To fix this annoying crap, if you're in Powershell:
 #git config --global --replace-all core.pager "Get-Content"
 git config --global --replace-all core.pager "Out-Host"
-git config --global core.editor='C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -nosession
+git config --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -nosession"
 git log
 #git reset --hard 0d1d7fc32e5a947fbd92ee598033d85bfc445a50      #If you haven't published the commits, this will discard stuff from your tracked files back to commit 0d1d7fc32e5a947fbd92ee598033d85bfc445a50, so won't be included in next commit. The files will still be there.
 #git clean -f      #discards untracked files
